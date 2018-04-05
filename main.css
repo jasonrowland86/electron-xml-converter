@@ -1,0 +1,32 @@
+.title {
+  text-align: center;
+}
+
+.converted-data {
+  margin-bottom: 1em;
+  border: 1px solid black;
+  padding: .5em;
+  color: rgb(36, 151, 136);
+}
+
+#links {
+  display: flex;
+  justify-content: space-around;
+}
+
+#xIcon {
+  color: black;
+  transition: .3s linear ease;
+}
+#xIcon:hover {
+  color: red;
+  cursor: pointer;
+}
+
+.xml-link {
+  transition: .3s linear ease;
+}
+.xml-link:hover {
+  color: black;
+  cursor: pointer;
+}
