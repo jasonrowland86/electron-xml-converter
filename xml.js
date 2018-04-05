@@ -7,13 +7,12 @@ function renderFileLinks() {
   fs.readdir('./data', (err, files)=>{
     console.log(files);
     xmlFiles = files;
-    //map through files and create html link
+    //Map through files and create html link
     let count = 1;
     xmlFiles.map(file =>{
       let xmlFile = document.createElement('a');
       xmlFile.className = "xml-link"
       xmlFile.innerText = count++;
-      // xmlFile.href = `data/${file}`;
       xmlFile.addEventListener('click', function(){
         convertedDiv.innerText = "";
         convertedDiv.className = "";
@@ -45,30 +44,37 @@ function convertXML(data) {
   // use the DOMParser browser API to convert text to a Document
   let XML = new DOMParser().parseFromString(data, "text/xml");
   console.log(XML);
-
+  //Get all nodes in the XML document and store in array
   let x = XML.documentElement.childNodes;
-  let txt;
+  //Create container div and X icon for converted data
   let htmlContainer = document.createElement('div');
   htmlContainer.className = "htmlContainer";
   let xIcon = document.createElement('div');
   xIcon.id = "xIcon";
   xIcon.innerHTML += "<h6 class='xIcon'>X</h6></br>";
   htmlContainer.appendChild(xIcon);
-
+  //Clear Main container everytime a link is clicked before rendering new data
   document.getElementById('converted-data').innerText = "";
   document.getElementById('converted-data').className = "";
-
+  //Loop through all xml nodes
   for (let i = 0; i < x.length; i++) {
     // console.log(x[i].nodeName);
     // console.log(x[i]);
+
+    //If an xml node has child nodes --
     if (x[i].childNodes.length > 0 ){
       // console.log(x[i].childNodes[0].nodeValue);
       // console.log(x[i].childNodes);
-      for (let y = 0; y <x[i].childNodes.length; y++) {
+
+      // -- loop through child nodes
+      for (let y = 0; y < x[i].childNodes.length; y++) {
         // console.log(x[i].childNodes[y].textContent);
-        txt = "<div class='converted'>" + x[i].childNodes[y].textContent + "</div></br>";
+
+        //Create html string with child node text and add to htmlContainer
+        let txt = "<div class='converted'>" + x[i].childNodes[y].textContent + "</div></br>";
         htmlContainer.innerHTML += txt;
       }
+      //Append the htmlContainer to the main div
       document.getElementById('converted-data').appendChild(htmlContainer);
       document.getElementById('converted-data').className = "converted-data";
       //Remove data
