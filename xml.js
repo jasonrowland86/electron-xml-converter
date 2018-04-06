@@ -16,7 +16,12 @@ function renderFileLinks() {
       xmlFile.addEventListener('click', function(){
         convertedDiv.innerText = "";
         convertedDiv.className = "";
-        //add loading
+
+        //Loading indicator
+        let loaderDiv = document.createElement('div');
+        loaderDiv.id = "loader";
+        convertedDiv.appendChild(loaderDiv);
+        //Load the xml file to be converted
         loadXML(`data/${file}`);
       });
       document.getElementById('links').appendChild(xmlFile);
@@ -33,6 +38,7 @@ function loadXML(file) {
       // console.log(this.responseXML);
       // console.log(this.responseText);
       xml.convertXML(this.responseText);
+      // document.querySelector('#loader').style.display = "none";
     }
   }
   xhttp.open("GET", file, true);
